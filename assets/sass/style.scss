@@ -1,0 +1,135 @@
+@mixin text-center-big {
+    margin: 10px 2em;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+@mixin text-center-upcase {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+$background-primary: #297F87;
+$color-primary: #fff;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#calendario {
+    width: 500px;
+    #mes {
+        position: relative;
+        @include text-center-big;
+
+        .box-mes {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+
+            a {
+                width: 32px;
+                height: 32px;
+                text-decoration: none;
+                font-size: 1.4rem;
+                color: rgba($color: #000000, $alpha: 1.0);
+                border-radius: 50%;
+                transition: opacity .4s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:hover {
+                    opacity: 0.4;
+                }
+            }
+        }
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+
+        td {
+            width: calc(100% / 7);
+            height: 50px;
+            @include text-center-upcase;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        tbody {
+            td {
+                cursor: pointer;
+                transition: .4s;
+                &:hover{
+                    background-color: $background-primary;
+                    color: $color-primary;
+                }
+            }
+            
+            td.now{
+                background-color: $background-primary; 
+                color: $color-primary;
+            }
+
+            td.now.event{
+                &:before{
+                    content: '';
+                    position: absolute;
+                    width: 5px;
+                    height: 5px;
+                    bottom: 5px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    border-radius: 50%;
+                    background-color: $color-primary;
+                }
+            }
+
+            td.event{
+                position: relative;
+                &:before{
+                    content: '';
+                    position: absolute;
+                    width: 5px;
+                    height: 5px;
+                    bottom: 5px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    border-radius: 50%;
+                    background-color: $background-primary;
+                }
+
+                &:hover{
+                    &:before{
+                        background-color: $color-primary;
+                    }
+                }
+            }
+
+            .next-month, .last-month{
+                color: rgba($color: #000000, $alpha: 0.4);
+
+                &:hover{
+                    color: $color-primary;
+                    background-color: #98a0a0
+                }
+            }
+        }
+    }
+
+    .box-ano {
+        @include text-center-big;
+    }
+}
